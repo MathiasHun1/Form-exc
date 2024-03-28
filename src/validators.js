@@ -1,4 +1,4 @@
-
+import { showValidIcon, hideValidIcon, showPassReqs } from "./helperFunctions"
 
 
 function validateEmail() {
@@ -19,6 +19,7 @@ function validateEmail() {
         errorMessage.textContent = 'valid'
         errorMessage.style.color = 'green'
         showValidIcon(emailInput)
+        return true
     }
 }
 
@@ -30,6 +31,7 @@ function validateCountry() {
         errorMessage.textContent = 'valid'
         errorMessage.style.color = 'green'
         showValidIcon(countryInput)
+        return true
     } else if (countryInput.value === 'none') {
         errorMessage.textContent = 'choose your country!'
         errorMessage.style.color = 'red'
@@ -55,6 +57,7 @@ function validateZip() {
         errorMessage.textContent = 'valid'
         errorMessage.style.color = 'green'
         showValidIcon(zipInput)
+        return true
     }
 }
 
@@ -69,24 +72,25 @@ function validatePassword() {
         hideValidIcon(element)
     } else if (isValid) {
         showValidIcon(element)
+        return true
     } else if (!isValid) {
         hideValidIcon(element)
     }
-
-    return element.value
 }
 
-function confirmPass(passwordInput) {
+function confirmPass() {
+    const passwordElem = document.querySelector('#password')
     const confirmElem = document.querySelector('#confirmpass')
     const errorMessage = confirmElem.nextElementSibling
-    if (confirmElem.value === passwordInput && confirmElem.value === '') {
+    if (confirmElem.value === passwordElem.value && confirmElem.value === '') {
         errorMessage.textContent = ''
         hideValidIcon(confirmElem)
-    } else if (confirmElem.value === passwordInput) {
+    } else if (confirmElem.value === passwordElem.value) {
         errorMessage.textContent = 'OK'
         errorMessage.style.color = 'green'
         showValidIcon(confirmElem)
-    } else if (confirmElem.value !== passwordInput) {
+        return true
+    } else if (confirmElem.value !== passwordElem.value) {
         errorMessage.textContent = 'passwords not the same!'
         errorMessage.style.color = 'red'
         hideValidIcon(confirmElem)
@@ -94,35 +98,5 @@ function confirmPass(passwordInput) {
 }
 
 
-
-// Helper functions
-function showValidIcon(element) {
-    const validIcon = element.parentElement.querySelector('#valid-icon')
-    validIcon.classList.add('active')
-}
-
-function hideValidIcon(element) {
-    const validIcon = element.parentElement.querySelector('#valid-icon')
-    validIcon.classList.remove('active')
-}
-
-function showPassReqs (input) {
-    //pattern and elements
-    const digitPattern = /.*\d.*\d.*/
-    const lettersPattern = /.*[A-Z].*[A-Z]/
-    const sizePattern = /.{8,}/
-    const digitReqElem = document.querySelector('#digits-req')
-    const lettersReqElem = document.querySelector('#uppers-req')
-    const sizeReqElem = document.querySelector('#length-req')
-
-    //reveal reqs list
-    const reqsList = document.querySelector('#reqs')
-    reqsList.style.display = 'block'
-
-    //update state of each sub-reqs
-    digitPattern.test(input) ? digitReqElem.style.color = 'green' : digitReqElem.style.color = 'red'
-    lettersPattern.test(input) ? lettersReqElem.style.color = 'green' : lettersReqElem.style.color = 'red'
-    sizePattern.test(input) ? sizeReqElem.style.color = 'green' : sizeReqElem.style.color = 'red'
-}
-
 export { validateEmail, validateCountry, validateZip, validatePassword, confirmPass }
+

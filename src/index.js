@@ -3,6 +3,8 @@ import {
     validateZip, validatePassword,
     confirmPass } from "./validators"
 
+import { showSuccess } from "./helperFunctions"
+
 const submitButton = document.querySelector('#submit-button')
 const emailInput = document.querySelector('#email')
 const countryInput = document.querySelector('#country')
@@ -19,7 +21,7 @@ submitButton.addEventListener('click', (event)=> {
     validateCountry()
     validateZip()
     validatePassword()
-    confirmPass(validatePassword())
+    confirmPass()
 
     //Add live validation process, after submit button is clicked the first time
     emailInput.addEventListener('keyup', validateEmail)
@@ -29,6 +31,14 @@ submitButton.addEventListener('click', (event)=> {
     confirmInput.addEventListener('keyup', () => {
         confirmPass(validatePassword())
     })
+
+    if (validateEmail() === true &&
+        validateCountry() === true &&
+        validateZip() === true &&
+        validatePassword() === true &&
+        confirmPass() === true) {
+            showSuccess()
+        }
 })
 
 

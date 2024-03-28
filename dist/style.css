@@ -11,6 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    position: relative;
 }
 
 .container {
@@ -25,6 +26,10 @@ body {
     justify-content: flex-start;
     align-items: center;
     gap: 1rem;
+}
+
+.container.valid {
+    display: none;
 }
 
 header {
@@ -111,3 +116,12 @@ ul {
     display: none;
 }
 
+.success {
+    text-align: center;
+    flex-direction: column;
+    display: none;
+}
+
+.success img {
+    height: 80vh;
+}
