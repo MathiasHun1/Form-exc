@@ -17,9 +17,9 @@
 
             <div class="input-wrapper">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
                 <small></small>
-                <i class="fa-solid fa-check"></i><i class="fa-solid fa-circle-xmark"></i>
+                <i class="fa-solid fa-check" id="valid-icon"></i><i class="fa-solid fa-circle-xmark"></i>
             </div>
 
             <div class="input-wrapper">
@@ -31,28 +31,32 @@
                     <option value="slo">Slovakia</option>
                 </select>
                 <small></small>
-                <i class="fa-solid fa-check"></i><i class="fa-solid fa-circle-xmark"></i>
+                <i class="fa-solid fa-check" id="valid-icon"></i><i class="fa-solid fa-circle-xmark"></i>
             </div>
 
             <div class="input-wrapper">
                 <label for="zip">Zip Code</label>
-                <input type="email" id="zip" name="zip">
+                <input type="number" id="zip" name="zip" placeholder="E.g.: 1193">
                 <small></small>
-                <i class="fa-solid fa-check"></i><i class="fa-solid fa-circle-xmark"></i>
+                <i class="fa-solid fa-check" id="valid-icon"></i><i class="fa-solid fa-circle-xmark" id="invalid-icon"></i>
             </div>
 
             <div class="input-wrapper">
                 <label for="password">Password</label>
-                <input type="email" id="password" name="password">
-                <small></small>
-                <i class="fa-solid fa-check"></i><i class="fa-solid fa-circle-xmark"></i>
+                <input type="password" id="password" name="password">
+                <ul>
+                    <li>- 8 characters at least</li>
+                    <li>- 2 uppersize letters</li>
+                    <li>- 2 numbers</li>
+                </ul>
+                <i class="fa-solid fa-check" id="valid-icon"></i><i class="fa-solid fa-circle-xmark"></i>
             </div>
 
             <div class="input-wrapper">
                 <label for="confirmpass">Confirm Password</label>
-                <input type="email" id="confirmpass" name="confirmpass">
+                <input type="password" id="confirmpass" name="confirmpass">
                 <small></small>
-                <i class="fa-solid fa-check"></i><i class="fa-solid fa-circle-xmark"></i>
+                <i class="fa-solid fa-check" id="valid-icon"></i><i class="fa-solid fa-circle-xmark"></i>
             </div>
             <button id="submit-button">Submit</button>
         </form>
