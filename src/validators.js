@@ -33,6 +33,7 @@ function validateCountry() {
     } else if (countryInput.value === 'none') {
         errorMessage.textContent = 'choose your country!'
         errorMessage.style.color = 'red'
+        hideValidIcon(countryInput)
     }
 }
 
@@ -62,13 +63,39 @@ function validatePassword() {
     const element = document.querySelector('#password')
     let isValid = pattern.test(element.value)
 
-    
+    showPassReqs(element.value)
+
+    if (element.value === '') {
+        hideValidIcon(element)
+    } else if (isValid) {
+        showValidIcon(element)
+    } else if (!isValid) {
+        hideValidIcon(element)
+    }
+
+    return element.value
+}
+
+function confirmPass(passwordInput) {
+    const confirmElem = document.querySelector('#confirmpass')
+    const errorMessage = confirmElem.nextElementSibling
+    if (confirmElem.value === passwordInput && confirmElem.value === '') {
+        errorMessage.textContent = ''
+        hideValidIcon(confirmElem)
+    } else if (confirmElem.value === passwordInput) {
+        errorMessage.textContent = 'OK'
+        errorMessage.style.color = 'green'
+        showValidIcon(confirmElem)
+    } else if (confirmElem.value !== passwordInput) {
+        errorMessage.textContent = 'passwords not the same!'
+        errorMessage.style.color = 'red'
+        hideValidIcon(confirmElem)
+    } 
 }
 
 
 
-
-
+// Helper functions
 function showValidIcon(element) {
     const validIcon = element.parentElement.querySelector('#valid-icon')
     validIcon.classList.add('active')
@@ -79,4 +106,23 @@ function hideValidIcon(element) {
     validIcon.classList.remove('active')
 }
 
-export { validateEmail, validateCountry, validateZip }
+function showPassReqs (input) {
+    //pattern and elements
+    const digitPattern = /.*\d.*\d.*/
+    const lettersPattern = /.*[A-Z].*[A-Z]/
+    const sizePattern = /.{8,}/
+    const digitReqElem = document.querySelector('#digits-req')
+    const lettersReqElem = document.querySelector('#uppers-req')
+    const sizeReqElem = document.querySelector('#length-req')
+
+    //reveal reqs list
+    const reqsList = document.querySelector('#reqs')
+    reqsList.style.display = 'block'
+
+    //update state of each sub-reqs
+    digitPattern.test(input) ? digitReqElem.style.color = 'green' : digitReqElem.style.color = 'red'
+    lettersPattern.test(input) ? lettersReqElem.style.color = 'green' : lettersReqElem.style.color = 'red'
+    sizePattern.test(input) ? sizeReqElem.style.color = 'green' : sizeReqElem.style.color = 'red'
+}
+
+export { validateEmail, validateCountry, validateZip, validatePassword, confirmPass }

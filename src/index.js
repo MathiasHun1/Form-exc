@@ -1,9 +1,14 @@
-import { validateEmail, validateCountry, validateZip } from "./validators"
+import { 
+    validateEmail, validateCountry, 
+    validateZip, validatePassword,
+    confirmPass } from "./validators"
 
 const submitButton = document.querySelector('#submit-button')
 const emailInput = document.querySelector('#email')
 const countryInput = document.querySelector('#country')
-let clickCounter = 0
+const zipInput = document.querySelector('#zip')
+const passwordInput = document.querySelector('#password')
+const confirmInput = document.querySelector('#confirmpass')
 
 submitButton.addEventListener('click', (event)=> {
     // preventing from submit the form
@@ -13,19 +18,19 @@ submitButton.addEventListener('click', (event)=> {
     validateEmail()
     validateCountry()
     validateZip()
-    // validatePassword()
-    // validatePassCheck()
-    clickCounter++
+    validatePassword()
+    confirmPass(validatePassword())
+
+    //Add live validation process, after submit button is clicked the first time
+    emailInput.addEventListener('keyup', validateEmail)
+    countryInput.addEventListener('click', validateCountry)
+    zipInput.addEventListener('keyup', validateZip)
+    passwordInput.addEventListener('keyup', validatePassword)
+    confirmInput.addEventListener('keyup', () => {
+        confirmPass(validatePassword())
+    })
 })
 
-// emailInput.addEventListener('keyup', ()=> {
-//     if (clickCounter > 0) {
-//         validateEmail()
-//     }
-// })
 
-// countryInput.addEventListener('blur', () => {
-//     validateCountry()
-// })
 
 
